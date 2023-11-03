@@ -1,29 +1,19 @@
 class Solution {
     fun romanToInt(s: String): Int {
-        val numList = mutableListOf<Int>()
         var result = 0
+        val map = mapOf(
+            'I' to 1, 'V' to 5, 'X' to 10, 'L' to 50, 'C' to 100, 'D' to 500, 'M' to 1000
+        )
         
-        s.forEach() {
-            numList.add(
-                when (it) {
-                    'I' -> 1
-                    'V' -> 5
-                    'X' -> 10
-                    'L' -> 50
-                    'C' -> 100
-                    'D' -> 500
-                    else -> 1000
-                }
-            )
-        }
-        
-        numList.forEachIndexed { idx, value ->
-            if (idx == numList.lastIndex) {
-                result += numList[idx]
+        s.forEachIndexed { idx, char ->
+            val value = map[char] ?: 0 
+            
+            if (idx == s.lastIndex) {
+                result += map[char] ?: 0
                 return result
             }
 
-            if (numList[idx] < numList[idx + 1]) {
+            if (value < (map[s[idx + 1]] ?: 0)) {
                 result -= value
             } else {
                 result += value
